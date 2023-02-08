@@ -2,6 +2,7 @@ import "./App.css";
 import AddRecipe from "./components/AddRecipe";
 import React, { useEffect, useState } from "react";
 import RecipeItem from "./components/RecipeItem";
+import Typography from "@mui/material/Typography";
 
 function App() {
   const [recipeList, setRecipeList] = useState([]);
@@ -12,7 +13,9 @@ function App() {
 
   return (
     <div className="App">
-      <header>Recipes</header>
+      <Typography variant="h3" gutterBottom>
+        Recipes
+      </Typography>
       <AddRecipe onAddRecipe={onAddRecipeHandler} />
       {recipeList.map((recipe) => (
         <RecipeItem key={recipe.id} recipe={recipe} />
@@ -22,3 +25,7 @@ function App() {
 }
 
 export default App;
+
+//to do
+// create a grid to hold recipe cards
+// open recipe card in larger view

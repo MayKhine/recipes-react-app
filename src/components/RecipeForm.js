@@ -1,4 +1,10 @@
 import { useState } from "react";
+import classes from "./RecipeForm.module.css";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+
 const RecipeForm = (props) => {
   const [enteredRecipeName, setEnteredRecipeName] = useState("");
   const [enteredIngredients, setEnteredIngredients] = useState("");
@@ -43,44 +49,81 @@ const RecipeForm = (props) => {
   };
 
   return (
-    <div>
-      <form>
-        <div>
-          <div>
-            <label>Recipie Name</label>
-            <input
-              type="text"
-              onChange={recipeNameChangeHandler}
-              value={enteredRecipeName}
-            ></input>
-          </div>
-          <div>
-            <label>Ingredients</label>
-            <input
-              type="text"
-              onChange={ingredientsChangeHandler}
-              value={enteredIngredients}
-            ></input>
-          </div>
-          <div>
-            <label>Directions</label>
-            <input
-              type="text"
-              onChange={directionsChangeHandler}
-              value={enteredDirections}
-            ></input>
-          </div>
-        </div>
-        <div>
-          <button type="submit" onClick={submitHandler}>
-            Submit
-          </button>
-          <button type="cancel" onClick={cancelHandler}>
+    <>
+      <form className={classes.backdrop}>
+        <Typography variant="h3" gutterBottom>
+          Recipe
+        </Typography>
+        <Stack sx={{ alignItems: "center" }}>
+          <TextField
+            id="standard-basic"
+            label="Title"
+            variant="standard"
+            size="small"
+            margin="normal"
+            sx={{ width: "50%" }}
+            onChange={recipeNameChangeHandler}
+            value={enteredRecipeName}
+          ></TextField>
+
+          <TextField
+            id="standard-basic"
+            label="Ingredients"
+            variant="standard"
+            size="small"
+            margin="normal"
+            sx={{ width: "50%" }}
+            onChange={ingredientsChangeHandler}
+            value={enteredIngredients}
+          ></TextField>
+
+          <TextField
+            id="standard-basic"
+            label="Directions"
+            variant="standard"
+            size="small"
+            margin="normal"
+            sx={{ width: "50%" }}
+            onChange={directionsChangeHandler}
+            value={enteredDirections}
+          ></TextField>
+        </Stack>
+
+        <Stack
+          sx={{ pt: 4 }}
+          direction="row"
+          spacing={2}
+          justifyContent="center"
+        >
+          <Button
+            variant="contained"
+            type="cancel"
+            onClick={cancelHandler}
+            sx={{
+              backgroundColor: "#ff7f1c",
+              "&:hover": {
+                backgroundColor: "#fc9544",
+              },
+            }}
+          >
             Cancel
-          </button>
-        </div>
+          </Button>
+          <Button
+            variant="contained"
+            type="submit"
+            onClick={submitHandler}
+            sx={{
+              backgroundColor: "#ff7f1c",
+              "&:hover": {
+                backgroundColor: "#fc9544",
+              },
+            }}
+          >
+            Submit
+          </Button>
+        </Stack>
       </form>
-    </div>
+    </>
   );
 };
 
