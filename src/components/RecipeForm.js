@@ -6,19 +6,19 @@ const RecipeForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log("Submitted");
 
     const newRecipe = {
-      recipe: enteredRecipeName,
+      id: Math.random().toString(),
+      name: enteredRecipeName,
       ingredients: enteredIngredients,
       directions: enteredDirections,
     };
 
-    console.log("NewRecipe", newRecipe);
     setEnteredRecipeName("");
     setEnteredIngredients("");
     setEnteredDirections("");
 
+    props.onAdd(newRecipe); //passing newRecipe to AddRecipe
     props.onClose();
   };
 

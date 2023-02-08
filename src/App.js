@@ -1,13 +1,22 @@
 import "./App.css";
-import NewRecipe from "./components/NewRecipe";
+import AddRecipe from "./components/AddRecipe";
+import React, { useEffect, useState } from "react";
+import RecipeItem from "./components/RecipeItem";
+
 function App() {
+  const [recipeList, setRecipeList] = useState([]);
+
+  const onAddRecipeHandler = (newRecipe) => {
+    setRecipeList([...recipeList, newRecipe]);
+  };
+
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <p>Recipes</p>
-      </header> */}
       <header>Recipes</header>
-      <NewRecipe />
+      <AddRecipe onAddRecipe={onAddRecipeHandler} />
+      {recipeList.map((recipe) => (
+        <RecipeItem key={recipe.id} recipe={recipe} />
+      ))}
     </div>
   );
 }
