@@ -51,7 +51,7 @@ const RecipeForm = (props) => {
   return (
     <>
       <form className={classes.backdrop}>
-        <Typography variant="h3" gutterBottom>
+        <Typography sx={{ marginTop: "3%" }} variant="h3" gutterBottom>
           Recipe
         </Typography>
         <Stack sx={{ alignItems: "center" }}>

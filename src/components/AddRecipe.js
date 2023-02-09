@@ -28,8 +28,7 @@ const AddRecipe = (props) => {
           },
         }}
       >
-        {" "}
-        Add Recipe{" "}
+        Add Recipe
       </Button>
       {recipeForm && (
         <RecipeForm onClose={onCloseHandler} onAdd={onAddHandler}></RecipeForm>
