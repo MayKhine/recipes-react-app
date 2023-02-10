@@ -1,45 +1,16 @@
 import "./App.css";
 import AddRecipe from "./components/AddRecipe";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import RecipeItem from "./components/RecipeItem";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import { useLocalStorageJSONObject } from "./hooks/useLocalStorageJSONObject";
+import RecipePage from "./components/RecipePage";
 
-const useLocalStorage = (key) => {
-  const [data, _setData] = useState(null);
-
-  // synchronzie what it in localstorage => "data"
-  useEffect(() => {
-    const storedData = localStorage.getItem(key);
-
-    if (storedData) {
-      _setData(storedData);
-    }
-  }, []);
-
-  const setData = (newData) => {
-    console.log("setData");
-    localStorage.setItem(key, newData);
-    _setData(newData);
-  };
-
-  return [data, setData];
-};
-
-const useLocalStorageJSONObject = (key) => {
-  const [dataStr, setDataStr] = useLocalStorage(key);
-
-  const dataObj = dataStr ? JSON.parse(dataStr) : null;
-  const setDataObj = (newDataObj) => {
-    setDataStr(JSON.stringify(newDataObj));
-  };
-
-  return [dataObj, setDataObj];
-};
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
-  // const [recipeList, setRecipeList] = useState([]);
   const [recipeList, setRecipeList] =
     useLocalStorageJSONObject("RecipeList123");
 
@@ -55,6 +26,16 @@ function App() {
 
   return (
     <div className="App">
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/whateve"
+            element={<RecipePage></RecipePage>}
+          ></Route>
+        </Routes>
+      </Router>
+
       <Box sx={{ marginTop: "3%" }}>
         <Typography variant="h3" gutterBottom>
           Recipes
