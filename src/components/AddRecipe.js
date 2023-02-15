@@ -1,4 +1,4 @@
-import RecipeForm from "./RecipeForm.js";
+import RecipeForm from "../pages/RecipeFormPage.js";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 

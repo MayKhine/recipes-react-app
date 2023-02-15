@@ -1,14 +1,17 @@
 import { useState } from "react";
-import classes from "./RecipeForm.module.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
+import { useRecipeList } from "../hooks/useRecipeList";
 
-const RecipeForm = (props) => {
+const RecipeForm = () => {
   const [enteredRecipeName, setEnteredRecipeName] = useState("");
   const [enteredIngredients, setEnteredIngredients] = useState("");
   const [enteredDirections, setEnteredDirections] = useState("");
+  const navigate = useNavigate();
+  const { addRecipeItem } = useRecipeList();
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -24,33 +27,30 @@ const RecipeForm = (props) => {
     setEnteredIngredients("");
     setEnteredDirections("");
 
-    props.onAdd(newRecipe); //passing newRecipe to AddRecipe
-    props.onClose();
+    addRecipeItem(newRecipe);
+    navigate(-1); //back to home page
   };
 
   const cancelHandler = (event) => {
     event.preventDefault();
-    props.onClose();
+    navigate(-1); //back to home page
   };
 
   const recipeNameChangeHandler = (event) => {
-    // console.log(event.target.value);
     setEnteredRecipeName(event.target.value);
   };
 
   const ingredientsChangeHandler = (event) => {
-    // console.log(event.target.value);
     setEnteredIngredients(event.target.value);
   };
 
   const directionsChangeHandler = (event) => {
-    // console.log(event.target.value);
     setEnteredDirections(event.target.value);
   };
 
   return (
     <>
-      <form className={classes.backdrop}>
+      <form>
         <Typography sx={{ marginTop: "3%" }} variant="h3" gutterBottom>
           Recipe
         </Typography>
