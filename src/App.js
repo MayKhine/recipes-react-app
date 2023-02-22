@@ -2,7 +2,6 @@ import "./App.css";
 import React, { useEffect } from "react";
 import RecipePage from "./pages/RecipePage";
 import { HomePage } from "./pages/HomePage";
-import { AddRecipePage } from "./pages/AddRecipePage";
 import {
   BrowserRouter as Router,
   Routes,
@@ -21,7 +20,7 @@ function App() {
           <Route path="/" element={<Navigate to={"/recipes"} />} />
           <Route exact path={"/recipes"} element={<HomePage />} />
           <Route exact path={"/addRecipe"} element={<RecipeForm />} />
-          <Route exact path="/recipes/:recipeName" element={<RecipePage />} />
+          <Route exact path="/recipes/:recipeId" element={<RecipePage />} />
         </Routes>
       </Router>
     </div>

@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import RecipePage from "../pages/RecipePage";
+import Box from "@mui/material/Box";
 // import { deleteLocalStorage } from "../hooks/useLocalStorageJSONObject";
 
 import {
@@ -24,28 +24,54 @@ const RecipeItem = (props) => {
     //retrive local data then delete data depending on the id
     props.onDeleteRecipe();
   };
-
+  console.log(props);
   return (
     <Card
       sx={{
-        display: "flex",
-        height: "30vh",
-        width: "30vh",
+        // display: "flex",
+        height: "40vh",
+        width: "40vh",
       }}
     >
       <CardContent sx={{ flex: 1 }}>
-        <Link to={"/recipes/" + props.recipe.name}>
+        <CardMedia
+          component="img"
+          height="140"
+          image="https://static.nationalgeographic.co.uk/files/styles/image_3200/public/tryitnow_GettyImages-1127515284_HR.jpg?w=1600&h=900"
+          alt="Food Image"
+        />
+        <Link
+          style={{ textDecoration: "none" }}
+          to={"/recipes/" + props.recipe.id}
+        >
           <Typography gutterBottom variant="h5" component="div">
             {props.recipe.name}
           </Typography>
         </Link>
         <Typography variant="body2" color="text.secondary">
-          {props.recipe.directions}
+          {props.recipe.subText}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        {/* <Typography variant="body2" color="text.secondary">
           {props.recipe.ingredients}
-        </Typography>
-        <Button
+        </Typography> */}
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "10px",
+          }}
+        >
+          <Typography variant="button" display="block" gutterBottom>
+            {props.recipe.difficulty}{" "}
+          </Typography>
+
+          <Typography variant="button" display="block" gutterBottom>
+            {props.recipe.cookingTime} mins
+          </Typography>
+        </Box>
+
+        {/* <Button
           variant="contained"
           type="delete"
           onClick={deleteRecipeHandler}
@@ -57,7 +83,7 @@ const RecipeItem = (props) => {
           }}
         >
           Delete
-        </Button>
+        </Button> */}
       </CardContent>
     </Card>
   );
