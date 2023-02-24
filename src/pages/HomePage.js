@@ -45,7 +45,3 @@ export const HomePage = () => {
     </>
   );
 };
-
-//work on recipe page with MUI (maybe images?)
-//keep workong in the recipe page!!!
-// add backend data server

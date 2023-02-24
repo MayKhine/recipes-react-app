@@ -15,6 +15,7 @@ import {
   Navigate,
   Link,
 } from "react-router-dom";
+import { flattenOptionGroups } from "@mui/base";
 // import Link from "@mui/material/Link";
 
 const RecipeItem = (props) => {
@@ -51,10 +52,6 @@ const RecipeItem = (props) => {
         <Typography variant="body2" color="text.secondary">
           {props.recipe.subText}
         </Typography>
-        {/* <Typography variant="body2" color="text.secondary">
-          {props.recipe.ingredients}
-        </Typography> */}
-
         <Box
           sx={{
             display: "flex",
