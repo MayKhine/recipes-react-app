@@ -5,21 +5,9 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-import { useRecipeList } from "../hooks/useRecipeList";
-
-import {
-  useQuery,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-
-// const queryClient = new QueryClient();
+import { useQuery } from "react-query";
 
 export const HomePage = () => {
-  // const { recipeList, deleteRecipeItem } = useRecipeList();
-
   //connecting to express server
   const {
     isLoading,

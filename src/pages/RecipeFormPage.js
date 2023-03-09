@@ -1,22 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import { MenuItem } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
-
 import { useRecipeList } from "../hooks/useRecipeList";
-
 import { useMutation } from "react-query";
 
 const RecipeForm = () => {
-  const { isLoading, isError, error, mutate } = useMutation((newRecipe) => {
+  const { mutate } = useMutation((newRecipe) => {
     return fetch("http://localhost:3001/addNewRecipe", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

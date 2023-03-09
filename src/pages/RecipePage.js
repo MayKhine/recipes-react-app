@@ -1,15 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { useRecipeList } from "../hooks/useRecipeList";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 
-import {
-  useQuery,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
+import { useQuery } from "react-query";
 
 const RecipePage = (props) => {
   const { recipeId } = useParams();
@@ -47,9 +40,3 @@ const RecipePage = (props) => {
 };
 
 export default RecipePage;
-
-// useRecipeList => returns recipe list
-const useRecipeDetail = (id) => {
-  const { recipeList } = useRecipeList();
-  return recipeList.find((recipe) => recipe.id === id);
-};
