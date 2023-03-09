@@ -19,12 +19,6 @@ import { flattenOptionGroups } from "@mui/base";
 // import Link from "@mui/material/Link";
 
 const RecipeItem = (props) => {
-  const deleteRecipeHandler = () => {
-    // deleteLocalStorage(props.recipe.id);
-
-    //retrive local data then delete data depending on the id
-    props.onDeleteRecipe();
-  };
   console.log(props);
   return (
     <Card
@@ -50,7 +44,7 @@ const RecipeItem = (props) => {
           </Typography>
         </Link>
         <Typography variant="body2" color="text.secondary">
-          {props.recipe.subText}
+          {props.recipe.subtext}
         </Typography>
         <Box
           sx={{
@@ -60,27 +54,13 @@ const RecipeItem = (props) => {
           }}
         >
           <Typography variant="button" display="block" gutterBottom>
-            {props.recipe.difficulty}{" "}
+            {props.recipe.difficulty}
           </Typography>
 
           <Typography variant="button" display="block" gutterBottom>
-            {props.recipe.cookingTime} mins
+            {props.recipe.time} mins
           </Typography>
         </Box>
-
-        {/* <Button
-          variant="contained"
-          type="delete"
-          onClick={deleteRecipeHandler}
-          sx={{
-            backgroundColor: "#ff7f1c",
-            "&:hover": {
-              backgroundColor: "#fc9544",
-            },
-          }}
-        >
-          Delete
-        </Button> */}
       </CardContent>
     </Card>
   );

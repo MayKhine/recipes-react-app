@@ -13,46 +13,70 @@ import Box from "@mui/material/Box";
 
 import { useRecipeList } from "../hooks/useRecipeList";
 
+import { useMutation } from "react-query";
+
 const RecipeForm = () => {
+  const { isLoading, isError, error, mutate } = useMutation((newRecipe) => {
+    return fetch("http://localhost:3001/addNewRecipe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newRecipe),
+    });
+  });
+
   const [enteredRecipeName, setEnteredRecipeName] = useState("");
-  const [enteredSubText, setEnteredSubText] = useState("");
+  const [enteredsubtext, setEnteredsubtext] = useState("");
   const [enteredDifficulty, setEnteredDifficulty] = useState("");
-  const [enteredCookingTime, setEnteredCookingTime] = useState("");
+  const [enteredtime, setEnteredtime] = useState("");
   const [enteredIngredients, setEnteredIngredients] = useState("");
   const [enteredDirections, setEnteredDirections] = useState("");
+  const [enteredImageURL, setEnteredImageURL] = useState("");
+  const [enteredOriginalURL, setEnteredOriginalURL] = useState("");
+  const [enteredNotes, setEnteredNotes] = useState("");
+
   const navigate = useNavigate();
+
   const { addRecipeItem } = useRecipeList();
 
   const recipeDifficultiesArr = [
-    "super easy",
+    "super easy", //0
     "easy",
     "Umhh..",
     "a bit difficult",
     "difficult",
-    "This is a struggle",
+    "This is a struggle", //5
   ];
 
-  const cookingTimeArr = [15, 30, 45, 60, 75, 90, 105, 120, 180, 240, 999];
+  const timeArr = [15, 30, 45, 60, 75, 90, 105, 120, 180, 240, 999];
 
   const submitHandler = (event) => {
     event.preventDefault();
 
     const newRecipe = {
-      id: Math.random().toString(),
+      id: Math.random(),
       name: enteredRecipeName,
-      subText: enteredSubText,
-      difficulty: enteredDifficulty,
-      cookingTime: enteredCookingTime,
-      ingredients: enteredIngredients,
-      directions: enteredDirections,
+      subtext: enteredsubtext,
+      difficulty: recipeDifficultiesArr.indexOf(enteredDifficulty),
+      time: enteredtime,
+      ingredients: [enteredIngredients],
+      directions: [enteredDirections],
+      imageURL: enteredImageURL,
+      originalURL: enteredOriginalURL,
+      notes: enteredNotes,
     };
 
+    mutate(newRecipe);
+    // return;
+
     setEnteredRecipeName("");
-    setEnteredSubText("");
+    setEnteredsubtext("");
     setEnteredDifficulty("");
-    setEnteredCookingTime("");
+    setEnteredtime("");
     setEnteredIngredients("");
     setEnteredDirections("");
+    setEnteredImageURL("");
+    setEnteredOriginalURL("");
+    setEnteredNotes("");
 
     addRecipeItem(newRecipe);
     navigate(-1); //back to home page
@@ -67,16 +91,16 @@ const RecipeForm = () => {
     setEnteredRecipeName(event.target.value);
   };
 
-  const subTextChangeHandler = (event) => {
-    setEnteredSubText(event.target.value);
+  const subtextChangeHandler = (event) => {
+    setEnteredsubtext(event.target.value);
   };
 
   const difficultyHandler = (event) => {
     setEnteredDifficulty(event.target.value);
   };
 
-  const cookingTimeHandler = (event) => {
-    setEnteredCookingTime(event.target.value);
+  const timeHandler = (event) => {
+    setEnteredtime(event.target.value);
   };
 
   const ingredientsChangeHandler = (event) => {
@@ -85,6 +109,18 @@ const RecipeForm = () => {
 
   const directionsChangeHandler = (event) => {
     setEnteredDirections(event.target.value);
+  };
+
+  const imageURLChangeHandler = (event) => {
+    setEnteredImageURL(event.target.value);
+  };
+
+  const originalURChangeHandler = (event) => {
+    setEnteredOriginalURL(event.target.value);
+  };
+
+  const notesHandler = (event) => {
+    setEnteredNotes(event.target.value);
   };
 
   return (
@@ -120,8 +156,8 @@ const RecipeForm = () => {
               size="small"
               margin="normal"
               sx={{ width: "50%" }}
-              onChange={subTextChangeHandler}
-              value={enteredSubText}
+              onChange={subtextChangeHandler}
+              value={enteredsubtext}
             ></TextField>
 
             <FormControl variant="standard" sx={{ margin: "10px", width: 200 }}>
@@ -142,17 +178,17 @@ const RecipeForm = () => {
             </FormControl>
 
             <FormControl variant="standard" sx={{ margin: "10px", width: 200 }}>
-              <InputLabel id="cookingTime">Cooking Time (mins)</InputLabel>
+              <InputLabel id="time">Cooking Time (mins)</InputLabel>
               <Select
-                labelId="cookingTime"
-                id="cookingTime"
-                value={enteredCookingTime}
-                label="cookingTime"
-                onChange={cookingTimeHandler}
+                labelId="time"
+                id="time"
+                value={enteredtime}
+                label="time"
+                onChange={timeHandler}
               >
-                {cookingTimeArr.map((cookingTime) => (
-                  <MenuItem key={cookingTime} value={cookingTime}>
-                    {cookingTime}
+                {timeArr.map((time) => (
+                  <MenuItem key={time} value={time}>
+                    {time}
                   </MenuItem>
                 ))}
               </Select>
@@ -178,6 +214,37 @@ const RecipeForm = () => {
               sx={{ width: "50%" }}
               onChange={directionsChangeHandler}
               value={enteredDirections}
+            ></TextField>
+
+            <TextField
+              id="standard-basic"
+              label="Image URL"
+              variant="standard"
+              size="small"
+              margin="normal"
+              sx={{ width: "50%" }}
+              onChange={imageURLChangeHandler}
+              value={enteredImageURL}
+            ></TextField>
+            <TextField
+              id="standard-basic"
+              label="Original URL"
+              variant="standard"
+              size="small"
+              margin="normal"
+              sx={{ width: "50%" }}
+              onChange={originalURChangeHandler}
+              value={enteredOriginalURL}
+            ></TextField>
+            <TextField
+              id="standard-basic"
+              label="Notes"
+              variant="standard"
+              size="small"
+              margin="normal"
+              sx={{ width: "50%" }}
+              onChange={notesHandler}
+              value={enteredNotes}
             ></TextField>
           </Stack>
 

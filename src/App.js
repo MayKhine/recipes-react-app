@@ -12,18 +12,28 @@ import {
 
 import RecipeForm from "./pages/RecipeFormPage.js";
 
+import {
+  useQuery,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Navigate to={"/recipes"} />} />
-          <Route exact path={"/recipes"} element={<HomePage />} />
-          <Route exact path={"/addRecipe"} element={<RecipeForm />} />
-          <Route exact path="/recipes/:recipeId" element={<RecipePage />} />
-        </Routes>
-      </Router>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <Router>
+          <Routes>
+            <Route path="/" element={<Navigate to={"/recipes"} />} />
+            <Route exact path={"/recipes"} element={<HomePage />} />
+            <Route exact path={"/addRecipe"} element={<RecipeForm />} />
+            <Route exact path="/recipes/:recipeId" element={<RecipePage />} />
+          </Routes>
+        </Router>
+      </div>
+    </QueryClientProvider>
   );
 }
 

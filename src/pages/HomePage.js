@@ -7,8 +7,30 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useRecipeList } from "../hooks/useRecipeList";
 
+import {
+  useQuery,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
+// const queryClient = new QueryClient();
+
 export const HomePage = () => {
-  const { recipeList, deleteRecipeItem } = useRecipeList();
+  // const { recipeList, deleteRecipeItem } = useRecipeList();
+
+  //connecting to express server
+  const {
+    isLoading,
+    error,
+    data: recipeList,
+  } = useQuery("repoData", () =>
+    fetch("http://localhost:3001/recipes").then((res) => res.json())
+  );
+
+  if (isLoading) return "Loading...";
+  if (error) return "An error has occurred: " + error.message;
 
   return (
     <>
@@ -33,11 +55,7 @@ export const HomePage = () => {
         >
           {recipeList?.map((recipe) => (
             <Grid item key={recipe.id}>
-              <RecipeItem
-                key={recipe.id}
-                recipe={recipe}
-                onDeleteRecipe={() => deleteRecipeItem(recipe.id)}
-              />
+              <RecipeItem key={recipe.id} recipe={recipe} />
             </Grid>
           ))}
         </Grid>

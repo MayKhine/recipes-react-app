@@ -1,26 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useRecipeList } from "../hooks/useRecipeList";
 import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+
+import {
+  useQuery,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
 
 const RecipePage = (props) => {
   const { recipeId } = useParams();
-  const myRecipe = useRecipeDetail(recipeId);
 
-  useEffect(() => {}, [myRecipe]);
+  const {
+    isLoading,
+    error,
+    data: curRecipe,
+  } = useQuery(["repoData", recipeId], () =>
+    fetch(`http://localhost:3001/recipes/${recipeId}`).then((res) => res.json())
+  );
+
+  if (isLoading) return "Loading...";
+  if (error) return "An error has occurred: " + error.message;
 
   return (
     <>
-      {myRecipe ? (
+      {curRecipe ? (
         <>
           <Typography variant="h4" component="h4">
-            {myRecipe.name}
+            {curRecipe.name}
           </Typography>
           <Typography variant="subtitle1">
-            Ingredients: {myRecipe.ingredients}
+            Ingredients: {curRecipe.ingredients}
           </Typography>
           <Typography variant="subtitle1">
-            Directions: {myRecipe.directions}
+            Directions: {curRecipe.directions}
           </Typography>
         </>
       ) : (
