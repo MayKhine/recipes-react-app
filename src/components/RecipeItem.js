@@ -20,6 +20,16 @@ import { flattenOptionGroups } from "@mui/base";
 
 const RecipeItem = (props) => {
   console.log(props);
+
+  const recipeDifficultiesArr = [
+    "Super easy", //0
+    "Easy",
+    "Umhh..",
+    "A bit difficult",
+    "Difficult",
+    "This is a struggle", //5
+  ];
+
   return (
     <Card
       sx={{
@@ -54,7 +64,7 @@ const RecipeItem = (props) => {
           }}
         >
           <Typography variant="button" display="block" gutterBottom>
-            {props.recipe.difficulty}
+            {recipeDifficultiesArr[props.recipe.difficulty]}
           </Typography>
 
           <Typography variant="button" display="block" gutterBottom>

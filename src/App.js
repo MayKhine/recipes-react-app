@@ -31,5 +31,3 @@ function App() {
 }
 
 export default App;
-// react browswer router
-//https://reactrouter.com/en/main/routers/picking-a-router
